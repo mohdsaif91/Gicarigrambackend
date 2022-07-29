@@ -1,7 +1,7 @@
 import Axios from "axios";
 
-const url = "http://localhost:5001";
-// const url = "https://fruitsvegfrontend.herokuapp.com/";
+// const url = "http://localhost:5001";
+const url = "https://fruitsvegfrontend.herokuapp.com/";
 
 export const onAuthenticated = async (payload) => {
   const axios = Axios.create({
