@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import "../styles/style.css";
+import { onAuthenticated } from "../API";
 // import data from '../data';
 
 const reducer = (state, action) => {
@@ -34,8 +35,13 @@ function HomeScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get("/api/products");
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+        const apiData = {
+          url: "/api/products",
+          method: "get",
+        };
+        const result = onAuthenticated(apiData).then((res) =>
+          dispatch({ type: "FETCH_SUCCESS", payload: res.data })
+        );
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
